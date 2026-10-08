@@ -1,0 +1,10 @@
+import fs from 'node:fs/promises';import path from 'node:path';
+const sourceRoot=path.resolve(import.meta.dirname,'..');
+const styles=['fonts.css','style.css','refinements.css','drop.css','next-edit.css','shop.css','product.css','cart.css','checkout.css'];
+await fs.writeFile(path.join(sourceRoot,'assets/site.css'),(await Promise.all(styles.map(name=>fs.readFile(path.join(sourceRoot,'assets',name),'utf8')))).join('\n'));
+await import('./verify.mjs');
+const root=path.resolve(import.meta.dirname,'..');const dest=path.join(root,'dist');
+await fs.rm(dest,{recursive:true,force:true});await fs.mkdir(dest,{recursive:true});
+for(const page of ['index.html','shop.html','product.html','cart.html','checkout.html'])await fs.copyFile(path.join(root,page),path.join(dest,page));
+await fs.cp(path.join(root,'assets'),path.join(dest,'assets'),{recursive:true,filter:source=>!/(?:images\/)(?:(?:catalog|hero)\.(?:png|webp)|product-cutout-\d+\.png)$/.test(source)});
+console.log('Build complete: dist/ — static homepage, local assets and no added runtime dependencies.');
