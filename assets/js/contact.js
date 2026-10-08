@@ -204,8 +204,26 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   HEADER NAVIGATION & FOOTER BEHAVIOURS
+   MEGA MENU & HEADER NAVIGATION BEHAVIOURS
    ========================================================================== */
+function initMegaPhotos() {
+  const catalog = window.UrbanCatalog || {};
+  const frames = catalog.imageFrames || [];
+  const products = catalog.products || [];
+
+  $$('.product-art').forEach(el => {
+    if (el.querySelector('svg')) return;
+    const match = el.className.match(/art-(\d+)/);
+    if (!match) return;
+    const index = Number(match[1]);
+    const frame = frames[index];
+    if (!frame) return;
+    const [x, y, w, h, sw, sh] = frame;
+    const p = products.find(item => item.art === index) || {};
+    el.innerHTML = `<svg class="catalog-photo" viewBox="${x} ${y} ${w} ${h}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><image href="assets/images/product-cutout-${index}.webp" width="${sw}" height="${sh}"/></svg>`;
+  });
+}
+
 function initHeaderNav() {
   const megaToggle = $('#mega-toggle');
   const mega = $('#category-menu');
@@ -213,36 +231,86 @@ function initHeaderNav() {
   const menuBtn = $('.mobile-toggle');
   const mobileNav = $('#mobile-nav');
   let megaTimer = null;
+  let lastPointerOpen = 0;
 
-  function closeMega() {
+  function closeMega(returnFocus = false) {
     clearTimeout(megaTimer);
     if (!mega) return;
     mega.hidden = true;
-    if (megaToggle) megaToggle.setAttribute('aria-expanded', 'false');
+    if (megaToggle) {
+      megaToggle.setAttribute('aria-expanded', 'false');
+      if (returnFocus) megaToggle.focus();
+    }
   }
 
   function openMega() {
     clearTimeout(megaTimer);
     if (!mega) return;
+    initMegaPhotos();
     mega.hidden = false;
     if (megaToggle) megaToggle.setAttribute('aria-expanded', 'true');
   }
 
   if (megaToggle && mega) {
-    megaToggle.addEventListener('click', () => (mega.hidden ? openMega() : closeMega()));
-    megaToggle.addEventListener('pointerenter', e => {
-      if (e.pointerType === 'mouse' && matchMedia('(min-width: 901px)').matches) openMega();
+    megaToggle.addEventListener('click', e => {
+      e.stopPropagation();
+      if (mega.hidden) {
+        openMega();
+      } else if (Date.now() - lastPointerOpen < 400) {
+        // User hovered right before clicking; keep open
+        openMega();
+      } else {
+        closeMega();
+      }
     });
+
+    megaToggle.addEventListener('pointerenter', e => {
+      if (e.pointerType === 'mouse' && matchMedia('(min-width: 901px)').matches) {
+        clearTimeout(megaTimer);
+        lastPointerOpen = Date.now();
+        openMega();
+      }
+    });
+
+    megaToggle.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        openMega();
+        const firstLink = $('a', mega);
+        if (firstLink) firstLink.focus();
+      }
+    });
+
+    mega.addEventListener('pointerenter', () => {
+      clearTimeout(megaTimer);
+    });
+
+    mega.addEventListener('click', e => {
+      if (e.target.closest('a')) closeMega();
+    });
+
     if (header) {
       header.addEventListener('pointerleave', e => {
-        if (e.pointerType === 'mouse') megaTimer = setTimeout(closeMega, 180);
+        if (e.pointerType === 'mouse') megaTimer = setTimeout(closeMega, 220);
       });
       header.addEventListener('focusout', e => {
         if (!header.contains(e.relatedTarget)) closeMega();
       });
     }
+
     document.addEventListener('click', e => {
       if (header && !header.contains(e.target)) closeMega();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !mega.hidden) {
+        closeMega(true);
+      }
+    });
+
+    matchMedia('(max-width: 900px)').addEventListener('change', () => {
+      closeMega();
+      if (mobileNav) mobileNav.hidden = true;
     });
   }
 
@@ -292,6 +360,7 @@ function initHeaderNav() {
 document.addEventListener('DOMContentLoaded', () => {
   initContactChannels();
   initContactForm();
+  initMegaPhotos();
   initHeaderNav();
   updateHeaderCount();
 
