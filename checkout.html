@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#6C2BFF"><meta name="description" content="Urban Shisha — single-page checkout preview. Complete delivery and customer details.">
+<title>Checkout — Urban Shisha</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="assets/fonts/urban-font-10.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/urban-font-5.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<script defer src="assets/js/gsap.min.js"></script><script defer src="assets/js/catalog.js"></script><script defer src="assets/js/checkout.js"></script>
+</head>
+<body class="checkout-page">
+<svg class="icon-library" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m5 5 14 14M5 19 19 5"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+</defs></svg>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="checkout-header" id="top">
+<div class="checkout-header-inner wrap">
+<a href="index.html" class="wordmark" aria-label="Urban Shisha home">URBAN<span>SHISHA</span><span class="brand-dot">®</span></a>
+<div class="checkout-header-actions">
+<a href="cart.html" class="checkout-back-link"><svg aria-hidden="true"><use href="#i-arrow"/></svg> Back to bag</a>
+<span class="checkout-age-pill">18+ ONLY</span>
+</div>
+</div>
+</header>
+
+<main id="main" class="checkout-main wrap">
+<div class="checkout-intro">
+<p class="eyebrow">CHECKOUT PREVIEW</p>
+<h1>MAKE IT YOURS.</h1>
+<p>A few details, then you’re all set.</p>
+</div>
+
+<details class="mobile-summary-accordion" id="mobile-summary-accordion">
+<summary class="mobile-summary-trigger">
+<span>Order summary · <strong id="mobile-summary-total">₹0</strong> (<span id="mobile-summary-qty">0 items</span>)</span>
+<svg aria-hidden="true"><use href="#i-chevron"/></svg>
+</summary>
+<div class="mobile-summary-content">
+<div class="summary-products-list" id="mobile-summary-products-list"></div>
+<div class="summary-calculation-lines">
+<div class="summary-calc-row">
+<span>Subtotal</span>
+<strong id="mobile-calc-subtotal">₹0</strong>
+</div>
+<div class="summary-calc-row">
+<span>Shipping</span>
+<span class="summary-shipping-status">Confirmed at live checkout</span>
+</div>
+<div class="summary-divider"></div>
+<div class="summary-payable-row">
+<div class="summary-payable-label">
+<strong>Payable total</strong>
+<span>Pending shipping and any applicable taxes.</span>
+</div>
+<strong class="summary-payable-amount" id="mobile-calc-payable">₹0</strong>
+</div>
+</div>
+</div>
+</details>
+
+<div class="checkout-layout" id="checkout-layout">
+<form class="checkout-form" id="checkout-form" novalidate>
+<!-- 01 Contact -->
+<section class="checkout-card" aria-labelledby="contact-heading">
+<div class="checkout-card-header">
+<h2 id="contact-heading">01 / Contact</h2>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label class="form-label" for="contact-email">Email address</label>
+<input class="form-input" id="contact-email" name="email" type="email" autocomplete="email" required placeholder="name@example.com">
+<p class="field-error" id="error-email" role="alert" hidden></p>
+<p class="form-helper">Order confirmation and invoice will be sent here.</p>
+</div>
+<div class="form-group">
+<label class="form-label" for="contact-phone">Mobile number (India)</label>
+<div class="phone-input-wrap">
+<span class="phone-prefix">+91</span>
+<input class="form-input" id="contact-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" required placeholder="9876543210" maxlength="10">
+</div>
+<p class="field-error" id="error-phone" role="alert" hidden></p>
+<p class="form-helper">10-digit mobile number for dispatch updates.</p>
+</div>
+<div class="checkout-guest-note">
+<svg aria-hidden="true"><use href="#i-check"/></svg>
+<span>Guest checkout active — no account or password required.</span>
+</div>
+</div>
+</section>
+
+<!-- 02 Delivery Address -->
+<section class="checkout-card" aria-labelledby="delivery-heading">
+<div class="checkout-card-header">
+<h2 id="delivery-heading">02 / Delivery address</h2>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label class="form-label" for="delivery-name">Full name</label>
+<input class="form-input" id="delivery-name" name="name" type="text" autocomplete="name" required placeholder="First and last name">
+<p class="field-error" id="error-name" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="delivery-address1">Street address</label>
+<input class="form-input" id="delivery-address1" name="address1" type="text" autocomplete="address-line1" required placeholder="Flat, house no., building, street">
+<p class="field-error" id="error-address1" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="delivery-address2">
+<span>Apartment, suite, landmark</span>
+<span class="form-label-optional">Optional</span>
+</label>
+<input class="form-input" id="delivery-address2" name="address2" type="text" autocomplete="address-line2" placeholder="Landmark or area">
+</div>
+<div class="form-row-2">
+<div class="form-group">
+<label class="form-label" for="delivery-city">City</label>
+<input class="form-input" id="delivery-city" name="city" type="text" autocomplete="address-level2" required placeholder="City / Town">
+<p class="field-error" id="error-city" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="delivery-state">State / Union Territory</label>
+<select class="form-select" id="delivery-state" name="state" autocomplete="address-level1" required>
+<option value="">Select State / UT</option>
+<option value="Delhi">Delhi</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Haryana">Haryana</option>
+<option value="Telangana">Telangana</option>
+<option value="Gujarat">Gujarat</option>
+<option value="West Bengal">West Bengal</option>
+<option value="Tamil Nadu">Tamil Nadu</option>
+<option value="Rajasthan">Rajasthan</option>
+<option value="Punjab">Punjab</option>
+<option value="Andhra Pradesh">Andhra Pradesh</option>
+<option value="Goa">Goa</option>
+<option value="Madhya Pradesh">Madhya Pradesh</option>
+<option value="Kerala">Kerala</option>
+<option value="Chandigarh">Chandigarh</option>
+<option value="Uttarakhand">Uttarakhand</option>
+<option value="Bihar">Bihar</option>
+<option value="Odisha">Odisha</option>
+<option value="Assam">Assam</option>
+<option value="Other">Other State / UT</option>
+</select>
+<p class="field-error" id="error-state" role="alert" hidden></p>
+</div>
+</div>
+<div class="form-row-2">
+<div class="form-group">
+<label class="form-label" for="delivery-pincode">PIN code</label>
+<input class="form-input" id="delivery-pincode" name="pincode" type="text" inputmode="numeric" autocomplete="postal-code" required placeholder="6-digit PIN" maxlength="6">
+<p class="field-error" id="error-pincode" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="delivery-country">Country</label>
+<input class="form-input" id="delivery-country" name="country" type="text" autocomplete="country-name" value="India" readonly aria-readonly="true">
+</div>
+</div>
+</div>
+</section>
+
+<!-- 03 Billing Address -->
+<section class="checkout-card" aria-labelledby="billing-heading">
+<div class="checkout-card-header">
+<h2 id="billing-heading">03 / Billing address</h2>
+</div>
+<div class="form-grid">
+<label class="checkbox-option">
+<input type="checkbox" id="billing-same" name="billing_same" checked>
+<span class="checkbox-label"><strong>Billing address is same as delivery address</strong></span>
+</label>
+<div id="billing-fields" hidden>
+<div class="form-grid" style="margin-top: 18px;">
+<div class="form-group">
+<label class="form-label" for="billing-name">Billing full name</label>
+<input class="form-input" id="billing-name" name="billing_name" type="text" placeholder="Full name">
+<p class="field-error" id="error-billing_name" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="billing-address1">Billing street address</label>
+<input class="form-input" id="billing-address1" name="billing_address1" type="text" placeholder="Street address">
+<p class="field-error" id="error-billing_address1" role="alert" hidden></p>
+</div>
+<div class="form-row-2">
+<div class="form-group">
+<label class="form-label" for="billing-city">City</label>
+<input class="form-input" id="billing-city" name="billing_city" type="text" placeholder="City">
+<p class="field-error" id="error-billing_city" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="form-label" for="billing-state">State / UT</label>
+<select class="form-select" id="billing-state" name="billing_state">
+<option value="">Select State / UT</option>
+<option value="Delhi">Delhi</option>
+<option value="Maharashtra">Maharashtra</option>
+<option value="Karnataka">Karnataka</option>
+<option value="Uttar Pradesh">Uttar Pradesh</option>
+<option value="Haryana">Haryana</option>
+<option value="Other">Other State / UT</option>
+</select>
+<p class="field-error" id="error-billing_state" role="alert" hidden></p>
+</div>
+</div>
+<div class="form-group">
+<label class="form-label" for="billing-pincode">PIN code</label>
+<input class="form-input" id="billing-pincode" name="billing_pincode" type="text" inputmode="numeric" placeholder="6-digit PIN" maxlength="6">
+<p class="field-error" id="error-billing_pincode" role="alert" hidden></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- 04 Delivery Notice -->
+<section class="checkout-card" aria-labelledby="delivery-notice-heading">
+<div class="checkout-card-header">
+<h2 id="delivery-notice-heading">04 / Delivery details</h2>
+</div>
+<div class="delivery-notice-card">
+<p><strong>Service & courier confirmation:</strong> Delivery availability, serviceable postal codes, and shipping charges will be confirmed when live checkout is connected.</p>
+<p class="sub-notice">All orders will be dispatched in discreet, secure protective packaging.</p>
+</div>
+</section>
+
+<!-- 05 Payment Notice -->
+<section class="checkout-card" aria-labelledby="payment-heading">
+<div class="checkout-card-header">
+<h2 id="payment-heading">05 / Payment method</h2>
+</div>
+<div class="payment-preview-card">
+<p class="eyebrow">PREVIEW MODE</p>
+<h3>Payment opens with the live store.</h3>
+<p>Payment gateways (UPI, Cards, Net Banking) will be enabled when Urban Shisha launches on WooCommerce. No payment or card numbers are collected in this design preview.</p>
+</div>
+</section>
+
+<!-- 06 Confirmations -->
+<section class="checkout-card" aria-labelledby="confirmations-heading">
+<div class="checkout-card-header">
+<h2 id="confirmations-heading">06 / Required confirmations</h2>
+</div>
+<div class="form-grid">
+<div class="form-group">
+<label class="checkbox-option">
+<input type="checkbox" id="confirm-age" name="confirm_age" required>
+<span class="checkbox-label">
+<strong>I confirm that I am 18 years of age or older.</strong>
+<small>Urban Shisha products are exclusively for adult use. Smoking is injurious to health.</small>
+</span>
+</label>
+<p class="field-error" id="error-confirm_age" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="checkbox-option">
+<input type="checkbox" id="confirm-terms" name="confirm_terms" required>
+<span class="checkbox-label">
+<strong>I agree to the <button type="button" class="policy-inline-link" data-open-policy="terms">terms & conditions</button> and <button type="button" class="policy-inline-link" data-open-policy="privacy">privacy policy</button>.</strong>
+</span>
+</label>
+<p class="field-error" id="error-confirm_terms" role="alert" hidden></p>
+</div>
+<div class="form-group">
+<label class="checkbox-option">
+<input type="checkbox" id="consent-marketing" name="consent_marketing">
+<span class="checkbox-label">Keep me updated on new drops, restocks and setup guides (optional).</span>
+</label>
+</div>
+</div>
+</section>
+
+<!-- Submit Card -->
+<div class="checkout-actions-card">
+<button type="submit" class="checkout-submit-btn" id="submit-checkout">Preview checkout <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+<p class="checkout-footer-disclaimer">Design preview only. No payment will be collected and no order will be submitted.</p>
+</div>
+</form>
+
+<!-- Sticky Order Summary Aside -->
+<aside class="checkout-summary-aside" id="checkout-summary-aside" aria-label="Order summary">
+<div class="checkout-summary-card">
+<div class="checkout-summary-header">
+<div>
+<p class="eyebrow">ORDER BREAKDOWN</p>
+<h2>Summary.</h2>
+</div>
+<a href="cart.html" class="summary-edit-cart-link">Edit bag</a>
+</div>
+<div class="summary-products-list" id="summary-products-list"></div>
+<div class="summary-calculation-lines">
+<div class="summary-calc-row">
+<span>Subtotal (<span id="summary-qty">0 items</span>)</span>
+<strong id="summary-subtotal">₹0</strong>
+</div>
+<div class="summary-calc-row">
+<span>Shipping</span>
+<span class="summary-shipping-status">Confirmed at live checkout</span>
+</div>
+</div>
+<div class="summary-divider"></div>
+<div class="summary-payable-row">
+<div class="summary-payable-label">
+<strong>Payable total</strong>
+<span>Pending shipping and any applicable taxes.</span>
+</div>
+<strong class="summary-payable-amount" id="summary-total">₹0</strong>
+</div>
+<div class="summary-safe-badge">
+<svg aria-hidden="true"><use href="#i-check"/></svg>
+<span>Adults 18+ only. Age verification required at checkout.</span>
+</div>
+</div>
+</aside>
+</div>
+
+<!-- Empty Cart State -->
+<div class="checkout-empty-state" id="checkout-empty" hidden>
+<div class="empty-bag-badge" aria-hidden="true"><svg><use href="#i-bag"/></svg></div>
+<h2>YOUR BAG IS EMPTY.</h2>
+<p>Select your hookah, bowls, or accessories from our collection before checking out.</p>
+<a class="button" href="shop.html">Explore the shop <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+</div>
+</main>
+
+<footer class="checkout-footer">
+<div class="checkout-footer-inner wrap">
+<span>© <span id="year">2026</span> Urban Shisha. For adults 18+. Smoking is injurious to health.</span>
+<a class="footer-preview" href="https://matescreation.com/" target="_blank" rel="noopener noreferrer">Made by Mates Creation</a>
+</div>
+</footer>
+
+<!-- Confirmation Dialog -->
+<dialog class="content-dialog" id="checkout-complete-dialog" aria-labelledby="complete-dialog-title">
+<div class="content-dialog-header">
+<span class="wordmark">URBAN<span>SHISHA</span></span>
+<button class="icon-button close-dialog" aria-label="Close message"><svg><use href="#i-close"/></svg></button>
+</div>
+<div class="article-content">
+<p class="eyebrow">CHECKOUT PREVIEW COMPLETE</p>
+<h2 id="complete-dialog-title">Your checkout details are complete.</h2>
+<p>Orders and payments are not enabled in this preview. Your delivery address and customer details have passed validation successfully.</p>
+<p>When Urban Shisha launches on WooCommerce, this form will connect directly to secure payment gateways and live courier dispatch.</p>
+<p>Your current bag and saved products remain intact in your browser session.</p>
+<div class="summary-age-notice" style="margin-block:20px">
+<svg aria-hidden="true"><use href="#i-check"/></svg>
+<span>Strictly for adults aged 18 and older. Smoking is injurious to health.</span>
+</div>
+<button class="button close-dialog" type="button">Back to store <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+</div>
+</dialog>
+
+<!-- Policy Dialog -->
+<dialog class="content-dialog" id="policy-dialog" aria-labelledby="policy-dialog-title">
+<div class="content-dialog-header">
+<span class="wordmark">URBAN<span>SHISHA</span></span>
+<button class="icon-button close-dialog" aria-label="Close policy"><svg><use href="#i-close"/></svg></button>
+</div>
+<div class="article-content">
+<p class="eyebrow">URBAN SHISHA / POLICY</p>
+<h2 id="policy-dialog-title">Terms & Conditions</h2>
+<p id="policy-dialog-text">Purchase terms will be published with the live store.</p>
+<button class="button close-dialog" type="button">Close <svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+</div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<noscript><p class="noscript-note">Enable JavaScript to complete the checkout preview in this design.</p></noscript>
+</body></html>
