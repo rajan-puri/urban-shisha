@@ -14,7 +14,7 @@ The user values large product images, readable names/prices, generous spacing, s
 | Older original | `/Users/rajan/Downloads/urban-shisha-homepage` — separate; do not edit it for this project |
 | Portfolio project | `/Users/rajan/Downloads/main portfolio` — unrelated; not the store's working folder |
 | Stack | Semantic HTML, custom CSS, vanilla JavaScript, local GSAP + ScrollTrigger |
-| Current pages | `index.html`, `shop.html`, `product.html`, `cart.html`, `checkout.html`, `account.html` |
+| Current pages | `index.html`, `shop.html`, `product.html`, `cart.html`, `checkout.html`, `account.html`, `contact.html` |
 | Future platform | Custom WordPress + WooCommerce theme, no Elementor/page builder |
 | Commerce today | Working browser preview, not connected to WooCommerce or payments |
 
@@ -34,6 +34,7 @@ npm start
 - Cart: http://127.0.0.1:8091/cart.html
 - Checkout: http://127.0.0.1:8091/checkout.html
 - Account: http://127.0.0.1:8091/account.html
+- Contact: http://127.0.0.1:8091/contact.html
 
 The server is `scripts/serve.py`, uses port **8091**, and serves compressed HTML/CSS/JS/SVG. It must remain running for local URLs to work. If a URL refuses connection, check the server first; that is not evidence of a design bug. Do not terminate unrelated services to free a port.
 
@@ -54,6 +55,7 @@ npm run build
 | `cart.html` | Dedicated Bag/Cart page, product rows, sticky order summary, empty state |
 | `checkout.html` | Single-page checkout preview, contact & delivery forms, honest notices, order summary |
 | `account.html` | My Account page, Login/Register preview, Demo dashboard, in-memory addresses, wishlist sync |
+| `contact.html` | Contact page, direct channel cards, enquiry form, conditional order ref, FAQ accordion |
 | `assets/style.css` | Base/reset, original component structure and responsive foundations |
 | `assets/refinements.css` | Product sizing/readability refinements |
 | `assets/drop.css` | Current brand tokens, visual language, header/nav and shared styling |
@@ -63,6 +65,7 @@ npm run build
 | `assets/cart.css` | Dedicated Cart page, responsive product rows, summary and empty state |
 | `assets/checkout.css` | Checkout page layout, form inputs, sticky summary card, notices and modal |
 | `assets/account.css` | Account layout, auth hero panel, form cards, dashboard navigation, in-memory address cards, wishlist grid, modals |
+| `assets/contact.css` | Contact layout, compact hero, channel cards, enquiry form inputs, inline validation, FAQ accordion |
 | `assets/fonts.css`, `assets/fonts/` | Local WOFF2 font definitions and files |
 | `assets/js/catalog.js` | Shared products, brand metadata and photographic SVG frames |
 | `assets/js/app.js` | Homepage catalog rendering, filters, builder, dialogs, bag/wishlist |
@@ -359,6 +362,44 @@ Dedicated My Account page (`account.html`) providing a client preview of user au
 
 - **URL routing**: Supports deep linking via `?tab=orders`, `?tab=wishlist`, `?tab=addresses`, `?tab=details`, or `?demo=1` to open the demo dashboard directly with the requested tab active.
 
+## 8e. Contact page
+
+Dedicated Contact page (`contact.html`) continuing the approved V2 design system, ready for custom WordPress theme conversion:
+
+- **Breadcrumb**: `Home / Contact`.
+- **Compact violet hero (`.contact-hero`)**:
+  - Heading: *“LET’S TALK SETUPS.”*
+  - Supporting copy: *“Product questions, order help or finding the right pieces—we’re here to help.”*
+  - Restrained brand geometry (SVG ring and curvature lines) matching the brand palette without overwhelming decorative images.
+- **Main Contact Area (2-column desktop, stacked mobile)**:
+  - **Left column: Direct Channels (`.contact-options-card`)**:
+    - WhatsApp card: reads `window.URBAN_STORE.whatsapp` from `assets/js/config.js`. When configured, renders a working link to `wa.me/<sanitized_phone>` (`target="_blank"`). When unconfigured, displays an honest availability notice (*“WhatsApp concierge will be available when the store launches.”*).
+    - Email support card: reads `window.URBAN_STORE.email` from `assets/js/config.js`. When configured, renders a `mailto:` link. When unconfigured, displays a restrained availability note (*“Direct email support opens with the live store. You can preview an enquiry below.”*).
+    - Order support card: directs customers directly to `account.html?tab=orders` to review dispatches and order history.
+    - Studio location card: strictly conditioned on `window.URBAN_STORE.address`. Hidden by default unless a real physical address is configured (no fake maps or placeholder store addresses).
+    - Excludes fabricated phone numbers, emails, addresses, operating hours, or artificial response-time guarantees.
+  - **Right column: Enquiry Form (`.contact-form-card`)**:
+    - Fields: Full name (required), Email address (required), Mobile / WhatsApp number (optional, validated for 10-digit Indian numbers only when entered), Topic dropdown (required), Message textarea (required).
+    - Dynamic conditional Order Reference: hidden by default; automatically appears when Topic is set to *“Order support”*; smoothly hides and resets when other topics are chosen.
+    - Inline accessible error messages with `role="alert"` and auto-focus on the first invalid field upon submission.
+    - Truthful preview CTA: labelled *“Preview enquiry”* while form backend transmission is not connected.
+    - On valid submission, renders accessible feedback container `#contact-form-feedback` (`role="status"`, `aria-live="polite"`): *“Your enquiry details are validated. Message transmission and automated concierge routing will open when Urban Shisha launches on WooCommerce.”*
+    - **Data integrity**: Customer messages and personal contact details are validated locally and are **never stored in localStorage, logged to console, or transmitted**. The form is not wiped out automatically, preserving entered customer details.
+- **Helpful answers: FAQ Accordion (`.contact-faq-section`)**:
+  - Semantic `<details>` and `<summary>` components for native accessibility.
+  - Practical setup topics: Choosing a hookah, Checking accessory compatibility, Shipping information, and Order support.
+  - Direct links to real project destinations: `shop.html?category=hookahs`, `index.html#guides`, `index.html#builder`, and `account.html?tab=orders`.
+  - Truthful copy without speculative delivery promises or universal accessory fitment claims.
+- **Closing CTA band (`.contact-cta-band`)**:
+  - Heading: *“Find your kind of setup.”*
+  - Primary button linking to `shop.html` and cream secondary button linking to `index.html#builder`.
+- **Mobile responsiveness**:
+  - Minimum 16px form input typography preventing iOS auto-zoom.
+  - Natural flow submit buttons and zero floating buttons obstructing form inputs or error alerts.
+  - Zero horizontal overflow across 1440px, 1024px, 768px, and 390px viewports.
+- **Cross-page integration**:
+  - Footer *“Contact us”* links across `index.html`, `shop.html`, `product.html`, `cart.html`, and `account.html` updated from placeholder buttons to `<a href="contact.html">Contact us</a>`.
+
 ## 9. Photography: preserve transparency and product identity
 
 The user previously rejected white rectangles over transparent products and decorative colour blobs tinting the actual objects. Avoid both regressions.
@@ -463,6 +504,7 @@ Existing browser scripts:
 | `review/cart-check.mjs` | Cart rows, line totals, subtotal, quantity modification, wishlist toggle, empty state, accessibility |
 | `review/checkout-check.mjs` | Single-page checkout, inline validation, phone/PIN formats, billing toggle, preview modal, multi-viewport layout, accessibility |
 | `review/account-check.mjs` | Auth view, password show/hide, login/register validation, demo dashboard, in-memory address CRUD, wishlist sync, account details, exit demo, deep links, 4 viewports, 0 Axe violations |
+| `review/contact-check.mjs` | Contact channels (WhatsApp/email/address), enquiry validation, conditional order ref, accessible preview feedback, FAQ accordion, 4 viewports, 0 Axe violations |
 | `review/quality-v2.mjs` | Homepage automated accessibility at four widths |
 | `review/fallback-v2.mjs` | Homepage controls/content with animation libraries blocked |
 

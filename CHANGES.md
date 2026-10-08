@@ -124,4 +124,42 @@ The Sultan replacement base has not been treated as Brando-compatible or added a
   - `scripts/verify.mjs`: added duplicate ID, relative anchor, and component checks for `account.html`.
   - `review/account-check.mjs`, `review/account-results.json`: automated Playwright and Axe test suite verifying 1440px, 1024px, 768px, and 390px viewports with zero horizontal overflow, 0 Axe violations, 0 console errors, and 0 network failures.
 
+## Contact page revision
+
+- `contact.html`, `assets/contact.css`, `assets/js/contact.js`: dedicated responsive Contact page matching the approved V2 design system, ready for custom WordPress theme conversion.
+- **Compact violet hero (`.contact-hero`)**:
+  - Heading: *“LET’S TALK SETUPS.”*
+  - Supporting copy: *“Product questions, order help or finding the right pieces—we’re here to help.”*
+  - Restrained SVG geometric brand elements.
+- **Main Contact Area (2-column desktop / stacked mobile)**:
+  - **Left column: Direct channels (`.contact-options-card`)**:
+    - WhatsApp concierge card reading `window.URBAN_STORE.whatsapp` from `assets/js/config.js`; displays working direct link when configured or honest availability note (*“WhatsApp concierge will be available when the store launches.”*) when unconfigured.
+    - Email support card reading `window.URBAN_STORE.email` from `assets/js/config.js`; displays working `mailto:` link when configured or honest availability note (*“Direct email support opens with the live store. You can preview an enquiry below.”*) when unconfigured.
+    - Order support card linking directly to `account.html?tab=orders`.
+    - Studio location card conditioned strictly on `window.URBAN_STORE.address`; hidden when unconfigured (no fake maps or fabricated physical addresses).
+    - No fabricated telephone numbers, email addresses, operating hours, or response-time guarantees.
+  - **Right column: Drop us a note form (`.contact-form-card`)**:
+    - Required fields: Full name, Email address, Topic dropdown, Message textarea.
+    - Optional fields: Mobile / WhatsApp number (validated strictly for 10-digit Indian numbers only when filled).
+    - Dynamic conditional Order Reference input: automatically shown when Topic is *“Order support”*, hidden for other topics.
+    - Accessible inline validation (`role="alert"`, auto-focus first invalid input).
+    - Truthful preview submission button labelled *“Preview enquiry”*.
+    - Accessible status alert container (`#contact-form-feedback`, `role="status"`): *“Your enquiry details are validated. Message transmission and automated concierge routing will open when Urban Shisha launches on WooCommerce.”*
+    - **Data integrity**: Form data is validated locally in memory; never stored, logged, or transmitted. Inputs remain preserved upon submission.
+- **Helpful answers: FAQ Accordion (`.contact-faq-section`)**:
+  - Native accessible `<details>` and `<summary>` components.
+  - Practical setup topics (choosing a hookah, accessory sizing, delivery overview, order tracking).
+  - Direct links to real pages (`shop.html?category=hookahs`, `index.html#guides`, `index.html#builder`, `account.html?tab=orders`).
+- **Closing CTA band (`.contact-cta-band`)**:
+  - *“Find your kind of setup.”* with direct buttons to `shop.html` and `index.html#builder`.
+- **Navigation Integration**:
+  - Customer Care *“Contact us”* links across `index.html`, `shop.html`, `product.html`, `cart.html`, and `account.html` updated from placeholder buttons to `<a href="contact.html">Contact us</a>`.
+- **Build & Verification**:
+  - `assets/js/config.js`: added explicit `email`, `address`, and `hours` configuration keys while preserving existing store keys.
+  - `scripts/build.mjs`: added `contact.css` to stylesheet bundle and `contact.html` to static distribution copy.
+  - `package.json`: added `contact.js` to `npm run lint`.
+  - `scripts/verify.mjs`: added ID uniqueness, relative link, and component assertions for `contact.html`.
+  - `review/contact-check.mjs`, `review/contact-results.json`: Playwright and Axe test suite verifying 1440px, 1024px, 768px, and 390px viewports with zero horizontal overflow, 0 Axe violations, 0 console errors, and 0 network failures.
+
+
 
