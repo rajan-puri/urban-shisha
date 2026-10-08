@@ -1,0 +1,11 @@
+{
+  "name": "urban-shisha-homepage-v2",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Urban Shisha responsive homepage concept, ready for WordPress template conversion",
+  "scripts": {
+    "start": "python3 scripts/serve.py",
+    "lint": "node --check assets/js/app.js && node --check assets/js/next-motion.js && node --check assets/js/catalog.js && node --check assets/js/product.js && node --check assets/js/shop.js && node --check assets/js/cart.js && node --check assets/js/checkout.js && node --check assets/js/config.js && node --check scripts/build.mjs && node --check scripts/verify.mjs && node scripts/verify.mjs",
+    "build": "node scripts/build.mjs"
+  }
+}
