@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "viewports": [
+    1440,
+    1024,
+    768,
+    390
+  ],
+  "checks": [
+    "age gate",
+    "loader ends",
+    "real mood visuals",
+    "carousel arrows and drag",
+    "quick add and bag count",
+    "wishlist",
+    "filters",
+    "count-up total",
+    "vibe meter",
+    "setup bundle",
+    "sharp card text",
+    "four-product spotlight",
+    "mobile shop bar",
+    "image mega menu",
+    "reduced-motion cleanup/restart"
+  ],
+  "errors": [],
+  "failed": []
+}

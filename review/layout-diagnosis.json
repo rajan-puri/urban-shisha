@@ -1,0 +1,281 @@
+1024 [
+  { tag: 'DIV', c: 'hero-float', right: 1061, parent: 'hero-parallax' },
+  { tag: 'svg', c: 'hero-photo', right: 1061, parent: 'hero-float' },
+  { tag: 'image', c: {}, right: 1220, parent: {} },
+  { tag: 'DIV', c: 'ticker', right: 1045, parent: 'ticker-frame' },
+  { tag: 'DIV', c: 'ticker-track', right: 3535, parent: 'ticker' },
+  {
+    tag: 'SPAN',
+    c: 'ticker-copy',
+    right: 1758,
+    parent: 'ticker-track'
+  },
+  { tag: 'B', c: '', right: 1053, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1266, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1500, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1728, parent: 'ticker-copy' },
+  {
+    tag: 'SPAN',
+    c: 'ticker-copy',
+    right: 3535,
+    parent: 'ticker-track'
+  },
+  { tag: 'B', c: '', right: 1942, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 2155, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 2388, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 2617, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 2831, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 3043, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 3277, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 3505, parent: 'ticker-copy' },
+  {
+    tag: 'ARTICLE',
+    c: 'product-card',
+    right: 1332,
+    parent: 'product-grid hookah-grid hookah-rail'
+  },
+  {
+    tag: 'DIV',
+    c: 'product-image',
+    right: 1330,
+    parent: 'product-card'
+  },
+  {
+    tag: 'BUTTON',
+    c: 'product-picture',
+    right: 1330,
+    parent: 'product-image'
+  },
+  {
+    tag: 'SPAN',
+    c: 'product-art art-3 ',
+    right: 1312,
+    parent: 'product-picture'
+  },
+  {
+    tag: 'svg',
+    c: 'catalog-photo',
+    right: 1312,
+    parent: 'product-art art-3 '
+  },
+  { tag: 'image', c: {}, right: 1298, parent: {} },
+  {
+    tag: 'BUTTON',
+    c: 'quick-add',
+    right: 1248,
+    parent: 'product-image'
+  },
+  { tag: 'svg', c: {}, right: 1226, parent: 'quick-add' },
+  { tag: 'use', c: {}, right: 1223, parent: {} },
+  {
+    tag: 'BUTTON',
+    c: 'save-product ',
+    right: 1312,
+    parent: 'product-image'
+  },
+  { tag: 'svg', c: {}, right: 1300, parent: 'save-product ' },
+  { tag: 'use', c: {}, right: 1299, parent: {} },
+  {
+    tag: 'DIV',
+    c: 'product-info',
+    right: 1330,
+    parent: 'product-card'
+  },
+  { tag: 'DIV', c: '', right: 1245, parent: 'product-info' },
+  { tag: 'P', c: 'product-type', right: 1245, parent: '' },
+  { tag: 'BUTTON', c: 'product-name', right: 1245, parent: '' }
+]
+768 [
+  { tag: 'DIV', c: 'hero-glow', right: 798, parent: 'hero drop-hero' },
+  { tag: 'DIV', c: 'hero-float', right: 814, parent: 'hero-parallax' },
+  { tag: 'svg', c: 'hero-photo', right: 814, parent: 'hero-float' },
+  { tag: 'image', c: {}, right: 923, parent: {} },
+  { tag: 'DIV', c: 'ticker', right: 784, parent: 'ticker-frame' },
+  { tag: 'DIV', c: 'ticker-track', right: 1763, parent: 'ticker' },
+  { tag: 'SPAN', c: 'ticker-copy', right: 874, parent: 'ticker-track' },
+  { tag: 'B', c: '', right: 844, parent: 'ticker-copy' },
+  {
+    tag: 'SPAN',
+    c: 'ticker-copy',
+    right: 1763,
+    parent: 'ticker-track'
+  },
+  { tag: 'B', c: '', right: 1058, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1271, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1505, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1733, parent: 'ticker-copy' },
+  {
+    tag: 'ARTICLE',
+    c: 'product-card',
+    right: 992,
+    parent: 'product-grid hookah-grid hookah-rail'
+  },
+  {
+    tag: 'DIV',
+    c: 'product-image',
+    right: 990,
+    parent: 'product-card'
+  },
+  {
+    tag: 'BUTTON',
+    c: 'product-picture',
+    right: 990,
+    parent: 'product-image'
+  },
+  {
+    tag: 'SPAN',
+    c: 'product-art art-2 ',
+    right: 972,
+    parent: 'product-picture'
+  },
+  {
+    tag: 'svg',
+    c: 'catalog-photo',
+    right: 972,
+    parent: 'product-art art-2 '
+  },
+  { tag: 'image', c: {}, right: 972, parent: {} },
+  {
+    tag: 'BUTTON',
+    c: 'quick-add',
+    right: 908,
+    parent: 'product-image'
+  },
+  { tag: 'svg', c: {}, right: 886, parent: 'quick-add' },
+  { tag: 'use', c: {}, right: 883, parent: {} },
+  {
+    tag: 'BUTTON',
+    c: 'save-product ',
+    right: 972,
+    parent: 'product-image'
+  },
+  { tag: 'svg', c: {}, right: 960, parent: 'save-product ' },
+  { tag: 'use', c: {}, right: 959, parent: {} },
+  { tag: 'DIV', c: 'product-info', right: 990, parent: 'product-card' },
+  { tag: 'DIV', c: '', right: 880, parent: 'product-info' },
+  { tag: 'P', c: 'product-type', right: 880, parent: '' },
+  { tag: 'BUTTON', c: 'product-name', right: 880, parent: '' },
+  { tag: 'P', c: 'price', right: 880, parent: '' },
+  {
+    tag: 'BUTTON',
+    c: 'add-product',
+    right: 972,
+    parent: 'product-info'
+  },
+  { tag: 'svg', c: {}, right: 961, parent: 'add-product' },
+  { tag: 'use', c: {}, right: 957, parent: {} },
+  {
+    tag: 'ARTICLE',
+    c: 'product-card',
+    right: 1320,
+    parent: 'product-grid hookah-grid hookah-rail'
+  },
+  {
+    tag: 'DIV',
+    c: 'product-image',
+    right: 1318,
+    parent: 'product-card'
+  }
+]
+390 [
+  { tag: 'DIV', c: 'hero-float', right: 406, parent: 'hero-parallax' },
+  { tag: 'svg', c: 'hero-photo', right: 406, parent: 'hero-float' },
+  { tag: 'image', c: {}, right: 450, parent: {} },
+  { tag: 'DIV', c: 'ticker', right: 399, parent: 'ticker-frame' },
+  { tag: 'DIV', c: 'ticker-track', right: 1286, parent: 'ticker' },
+  { tag: 'SPAN', c: 'ticker-copy', right: 639, parent: 'ticker-track' },
+  { tag: 'B', c: '', right: 453, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 619, parent: 'ticker-copy' },
+  {
+    tag: 'SPAN',
+    c: 'ticker-copy',
+    right: 1286,
+    parent: 'ticker-track'
+  },
+  { tag: 'B', c: '', right: 775, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 929, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1100, parent: 'ticker-copy' },
+  { tag: 'B', c: '', right: 1266, parent: 'ticker-copy' },
+  {
+    tag: 'BUTTON',
+    c: 'filter-button',
+    right: 455,
+    parent: 'filter-row'
+  },
+  {
+    tag: 'BUTTON',
+    c: 'filter-button',
+    right: 570,
+    parent: 'filter-row'
+  },
+  {
+    tag: 'ARTICLE',
+    c: 'product-card',
+    right: 660,
+    parent: 'product-grid hookah-grid hookah-rail'
+  },
+  {
+    tag: 'DIV',
+    c: 'product-image',
+    right: 658,
+    parent: 'product-card'
+  },
+  {
+    tag: 'BUTTON',
+    c: 'product-picture',
+    right: 658,
+    parent: 'product-image'
+  },
+  {
+    tag: 'SPAN',
+    c: 'product-art art-1 ',
+    right: 651,
+    parent: 'product-picture'
+  },
+  {
+    tag: 'svg',
+    c: 'catalog-photo',
+    right: 651,
+    parent: 'product-art art-1 '
+  },
+  { tag: 'image', c: {}, right: 686, parent: {} },
+  {
+    tag: 'SPAN',
+    c: 'product-badge badge-limited',
+    right: 413,
+    parent: 'product-image'
+  },
+  {
+    tag: 'BUTTON',
+    c: 'save-product ',
+    right: 646,
+    parent: 'product-image'
+  },
+  { tag: 'svg', c: {}, right: 634, parent: 'save-product ' },
+  { tag: 'use', c: {}, right: 632, parent: {} },
+  { tag: 'DIV', c: 'product-info', right: 658, parent: 'product-card' },
+  { tag: 'DIV', c: '', right: 603, parent: 'product-info' },
+  { tag: 'P', c: 'product-type', right: 603, parent: '' },
+  { tag: 'BUTTON', c: 'product-name', right: 603, parent: '' },
+  { tag: 'P', c: 'price', right: 603, parent: '' },
+  {
+    tag: 'BUTTON',
+    c: 'add-product',
+    right: 642,
+    parent: 'product-info'
+  },
+  { tag: 'svg', c: {}, right: 629, parent: 'add-product' },
+  { tag: 'use', c: {}, right: 625, parent: {} },
+  {
+    tag: 'ARTICLE',
+    c: 'product-card',
+    right: 991,
+    parent: 'product-grid hookah-grid hookah-rail'
+  },
+  {
+    tag: 'DIV',
+    c: 'product-image',
+    right: 989,
+    parent: 'product-card'
+  }
+]
