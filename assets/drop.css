@@ -41,3 +41,29 @@ body{background:var(--bg);color:var(--ink);overflow-x:clip}html{scroll-padding-t
 /* Give saved-product controls breathing room and make filter labels easier to scan. */
 .product-card .save-product{top:18px;right:18px;width:44px;height:44px;min-width:44px;min-height:44px}.save-product svg{width:20px;height:20px}.filter-button{font-size:16px;line-height:1.25;min-height:48px;padding:12px 23px}
 @media(max-width:600px){.product-card .save-product{top:12px;right:12px;width:44px;height:44px;min-width:44px;min-height:44px}.save-product svg{width:19px;height:19px}.filter-button{font-size:15px;min-height:48px;padding:12px 18px}}
+
+/* Floating controls: Let's talk redirection & Back to top */
+a.whatsapp-button{text-decoration:none;cursor:pointer}
+.back-to-top{position:fixed;right:22px;bottom:22px;z-index:34;width:44px;height:44px;border-radius:50%;background:var(--bg);color:var(--ink);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px);transition:opacity .25s ease,visibility .25s ease,transform .25s ease,background .18s ease,box-shadow .18s ease}
+.back-to-top.is-visible{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+.back-to-top:hover{background:var(--accent);color:var(--ink);transform:translateY(-2px);box-shadow:3px 5px 0 var(--ink)}
+.back-to-top:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.back-to-top:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.back-to-top svg{width:18px;height:18px;stroke-width:2.5;transform:rotate(-90deg);transition:transform .2s ease;pointer-events:none}
+.back-to-top:hover svg{transform:rotate(-90deg) translateX(2px)}
+body:has(.whatsapp-button) .back-to-top,
+.whatsapp-button ~ .back-to-top{bottom:80px}
+@media(max-width:600px){
+  .back-to-top{right:15px;bottom:20px;width:44px;height:44px}
+  body:has(.whatsapp-button) .back-to-top,
+  .whatsapp-button ~ .back-to-top{bottom:148px}
+  .wholesale-page body:has(.whatsapp-button) .back-to-top,
+  .wholesale-page .whatsapp-button ~ .back-to-top{bottom:155px}
+}
+@media(prefers-reduced-motion:reduce){
+  .back-to-top{transition:none}
+  .back-to-top:hover{transform:none}
+  .back-to-top:active{transform:none}
+  .back-to-top svg,.back-to-top:hover svg{transform:rotate(-90deg)}
+}
+

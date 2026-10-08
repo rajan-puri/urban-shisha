@@ -36,3 +36,36 @@ const contactHtml=await fs.readFile(path.join(root,'contact.html'),'utf8');const
 for(const m of contactHtml.matchAll(/(?:src|href)="([^"]+)"/g)){const url=m[1];if(url.startsWith('#'))assert(contactIds.includes(url.slice(1)),`Missing Contact anchor ${url}`);else if(!/^(https?:|data:|mailto:)/.test(url))await fs.access(path.join(root,url.split(/[?#]/)[0]));}
 for(const id of ['contact-hero-title','contact-layout','contact-form','contact-name','contact-email','contact-phone','contact-topic','order-ref-group','contact-order-ref','contact-message','contact-form-feedback','submit-contact','faq-heading','age-dialog'])assert(contactIds.includes(id),`Missing Contact component ${id}`);
 
+
+const wholesaleHtml=await fs.readFile(path.join(root,'wholesale.html'),'utf8');const wholesaleIds=[...wholesaleHtml.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(wholesaleIds).size,wholesaleIds.length,'Duplicate Wholesale IDs');
+for(const m of wholesaleHtml.matchAll(/(?:src|href)="([^"]+)"/g)){const url=m[1];if(url.startsWith('#'))assert(wholesaleIds.includes(url.slice(1)),`Missing Wholesale anchor ${url}`);else if(!/^(https?:|data:|mailto:)/.test(url))await fs.access(path.join(root,url.split(/[?#]/)[0]));}
+for(const id of ['ws-title','ws-products','enquiry-list','ws-quote-form','ws-review-dialog','ws-prepared-message','age-dialog'])assert(wholesaleIds.includes(id),`Missing Wholesale component ${id}`);
+
+for(const filename of ['about.html','shipping.html','returns.html','privacy.html','terms.html','age-policy.html']){
+ const content=await fs.readFile(path.join(root,filename),'utf8');
+ const pageIds=[...content.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
+ assert.equal(new Set(pageIds).size,pageIds.length,`Duplicate IDs: ${filename}`);
+ for(const m of content.matchAll(/(?:src|href)="([^"]+)"/g)){
+  const url=m[1];if(url.startsWith('#'))assert(pageIds.includes(url.slice(1)),`Missing anchor ${url}: ${filename}`);
+  else if(!/^(https?:|data:|mailto:)/.test(url))await fs.access(path.join(root,url.split(/[?#]/)[0]));
+ }
+ assert.equal((content.match(/<h1[ >]/g)||[]).length,1,`Expected one h1: ${filename}`);
+ for(const id of ['main','footer','age-dialog','category-menu','mobile-nav','back-to-top'])assert(pageIds.includes(id),`Missing ${id}: ${filename}`);
+}
+
+for(const [pName, pHtml, pIds] of [
+ ['index.html', html, ids],
+ ['shop.html', shop, shopIds],
+ ['product.html', productHtml, productIds],
+ ['cart.html', cartHtml, cartIds],
+ ['checkout.html', checkoutHtml, checkoutIds],
+ ['account.html', accountHtml, accountIds],
+ ['contact.html', contactHtml, contactIds],
+ ['wholesale.html', wholesaleHtml, wholesaleIds]
+]){
+ assert(pIds.includes('back-to-top'), `Missing back-to-top button in ${pName}`);
+ if(pHtml.includes('class="whatsapp-button"')){
+  assert(pHtml.includes('class="whatsapp-button" href="contact.html"'), `whatsapp-button must link to contact.html in ${pName}`);
+ }
+}
+

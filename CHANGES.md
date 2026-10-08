@@ -163,3 +163,40 @@ The Sultan replacement base has not been treated as Brando-compatible or added a
 
 
 
+
+## Wholesale page (3D deferred)
+
+- New `wholesale.html`, `assets/wholesale.css`, `assets/js/wholesale.js`: premium product hero, category/search catalogue, independent bulk list and quantities, business form, review/copy and configured contact links, process/FAQ sections.
+- Existing HTML pages: main desktop/mobile Build Your Setup navigation replaced with Wholesale; mega menus and discovery footers link to the page. Retail builder/content CTAs retained.
+- Build/lint/static verification now include Wholesale.
+- `WHOLESALE-PLAN.md`, `design.md`, `README.md`: page status and separate enquiry storage documented; R3F scene explicitly remains deferred.
+- `review/wholesale-check.mjs`, results/screenshots: functional, responsive and accessibility checks.
+
+No new dependencies, fake wholesale prices/MOQs, automatic message sending or personal-data persistence were introduced.
+
+Wholesale verification: lint and production build pass. Browser checks pass at 1440, 1024, 768 and 390px with no horizontal overflow, JavaScript errors, failed responses or automated WCAG A/AA violations on the page. Verified category filters, saved product quantities, form validation, enquiry review, clipboard copy, prepared contact links, reduced motion and GSAP fallback. Contact link tests used isolated preview configuration; no messages were sent. Reports/screenshots are in `review/wholesale-*`.
+
+
+## About and standalone policies — 8 October 2026
+
+Added `about.html` plus `shipping.html`, `returns.html`, `privacy.html`, `terms.html` and `age-policy.html`. About uses the approved product-led ivory/violet/lime identity and real transparent product assets, with an editorial introduction, shopping-category links, product-detail principles, adult-use note and CTA. Policies have an active page selector, section anchors, readable mobile body text and explicit review-draft status for unconfirmed business terms.
+
+Added scoped `assets/pages.css` and shared `assets/js/pages.js`; no new runtime dependencies. Existing footers now link to About and the standalone policies. Checkout/account inline policy links open a new tab. Privacy saved-data clearing requires explicit confirmation, removes only four Urban Shisha preview keys and keeps unrelated browser data. Policy text remains readable without an age confirmation; About uses the existing age gate. Final-content requirements are documented in `POLICY-REVIEW.md`.
+
+Verification: lint/static checks and build pass. Six-page browser checks passed at 1440, 1024, 768, 390 and 320px with no horizontal overflow or JavaScript errors. Automated WCAG A/AA checks on desktop/mobile returned no violations. Verified policy anchors, mobile menu/footer, age gate, saved-data clear/cancel and GSAP fallback. Additional checks cover active mobile policy visibility, the homepage About footer link and a checkout policy popup preserving form values. See `review/pages-check.mjs`, `review/pages-results.json` and page screenshots.
+
+## "Let's talk" redirection to Contact page & Back to top button — 8 October 2026
+
+- **"Let's talk" Redirection**:
+  - Replaced `<button class="whatsapp-button" data-info="contact">` with semantic `<a class="whatsapp-button" href="contact.html" aria-label="Contact Urban Shisha">` across all pages (`index.html`, `shop.html`, `product.html`, `cart.html`, `account.html`, `wholesale.html`, and policy pages).
+  - Updated `showInfo('contact')` in `assets/js/app.js`, `shop.js`, and `product.js` to redirect directly to `contact.html` (`window.location.href = 'contact.html'`).
+  - Added `a.whatsapp-button { text-decoration: none; cursor: pointer; }` to `assets/drop.css`.
+- **Floating "Back to top" Button**:
+  - Implemented `#back-to-top` floating pill button (`width: 44px; height: 44px; border-radius: 50%`) with Urban Shisha brand tokens: Ivory background `#FAF7F2`, 2px solid Ink `#14121F` border, and 3px offset Ink box shadow. Hover activates Lime `#C6FF3D`.
+  - Upward navigation uses `#i-arrow` SVG icon rotated `-90deg` (`transform: rotate(-90deg)`).
+  - Controller in `assets/js/catalog.js`: uses passive scroll listener with `requestAnimationFrame` to reveal the button when `window.scrollY > 350`, smoothly scrolling to top on click with keyboard focus restored to `#top`. Honors `prefers-reduced-motion: reduce` with instant jump.
+  - Positioned non-overlapping on both desktop and mobile: on mobile, sits cleanly above the Let's talk button at `bottom: 148px; right: 15px;`, keeping comfortable touch targets without interfering with `.mobile-shop-bar`. On Contact and checkout pages without Let's talk, anchors at `bottom: 22px; right: 22px;`.
+- **Build & Verification**:
+  - Updated `scripts/verify.mjs` with assertions ensuring `#back-to-top` exists across all pages and `.whatsapp-button` links to `contact.html`.
+  - Added Playwright test suite `scripts/test-back-to-top.mjs` verifying navigation, scroll reveal, smooth scroll restoration, and zero mobile bounding box overlap (`review/mobile-buttons-scroll.png`, `review/desktop-home-scrolled-1440.png`, `review/desktop-contact-scrolled-1440.png`).
+

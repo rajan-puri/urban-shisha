@@ -6,7 +6,7 @@ A separate enhanced copy of `/Users/rajan/Downloads/urban-shisha-homepage`. The 
 
 Run `npm start`, then open http://127.0.0.1:8091/. Run `npm run lint` and `npm run build` to verify and generate `dist/`.
 
-The preview server compresses HTML, CSS, JavaScript and SVG. The build combines the seven CSS source files into `assets/site.css`. Edit the source stylesheets, then rebuild to refresh the bundle.
+The preview server compresses HTML, CSS, JavaScript and SVG. The build combines the thirteen CSS source files into `assets/site.css`. Edit the source stylesheets, then rebuild to refresh the bundle.
 
 ## What's included
 
@@ -39,7 +39,7 @@ Open http://127.0.0.1:8091/shop.html. Category, brand, minimum/maximum price, ne
 
 Homepage “Shop by brand” sits after categories. Six supplied logos are saved locally without alteration; their links open the corresponding Shop brand filter. These flavour brands currently have no items in the existing hardware-only preview catalog, so the page explains that the brand catalog is pending. No inventory or prices were invented for them. Existing hardware brands are filterable too.
 
-Both pages share `assets/js/catalog.js` and the same bag, wishlist and age-choice storage. `shop.html`, `assets/shop.css` and `assets/js/shop.js` implement the new page. Build includes all three HTML files and all local images. Source image URLs are in `review/brand-image-sources.json`. Shop interaction/accessibility results are in `review/shop-results.json`; screenshots are in `review/shop-*.png`.
+Both pages share `assets/js/catalog.js` and the same bag, wishlist and age-choice storage. `shop.html`, `assets/shop.css` and `assets/js/shop.js` implement the new page. Build includes all fourteen HTML files and all local images. Source image URLs are in `review/brand-image-sources.json`. Shop interaction/accessibility results are in `review/shop-results.json`; screenshots are in `review/shop-*.png`.
 
 ## Brando product page
 
@@ -48,3 +48,16 @@ Open http://127.0.0.1:8091/product.html. Brando cards on Home/Shop now open this
 The live reference currently lists Brando at ₹9,499, coal (250g / 18 pcs) at ₹135, and the VG gold-handle / black hose at ₹799. These reference values are reflected in the preview catalog, without claiming Urban Shisha stock or adopting reference-store free gifts/reviews. Archived source JSON and exact image URLs are in `review/`.
 
 The additional Sultan Base reference is a VG replacement base specifically for Sultan Hookah; it is not shown as a compatible Brando accessory. Its listed width “9 inches / 20cm” is inconsistent, so verify it before catalog entry. Its four photos are downloaded locally for later use.
+
+## Saved future idea
+
+[`WHOLESALE-PLAN.md`](WHOLESALE-PLAN.md) records the deferred Wholesale enquiry page and animated React Three Fiber miniature warehouse/store scene. The page and navigation are now implemented; React/3D animation remains deferred.
+
+## Wholesale
+
+Open http://127.0.0.1:8091/wholesale.html. Select products, adjust quantities, add business details and review/copy a bulk enquiry. Only product/quantity selections persist under `urban-wholesale-enquiry`; retail cart data remains separate. WhatsApp/email sending links appear only for configured channels, and no message or order is sent automatically. Main navigation now links to Wholesale; the homepage retail builder is retained. No React/3D scene is added in this phase.
+
+
+## About and policies
+
+Open `about.html` for the new brand page. Standalone policies are `shipping.html`, `returns.html`, `privacy.html`, `terms.html` and `age-policy.html`. Existing footer links point to these pages; About is under Discover. They use `assets/pages.css` / `assets/js/pages.js` and are included in lint/build/static verification. Policy business terms remain clearly marked review drafts; fill the real merchant and operational details in `POLICY-REVIEW.md` before live use.

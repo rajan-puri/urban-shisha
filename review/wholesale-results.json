@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "failed": [],
+  "axe": [
+    {
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "width": 1024,
+      "violations": []
+    },
+    {
+      "width": 768,
+      "violations": []
+    },
+    {
+      "width": 390,
+      "violations": []
+    }
+  ],
+  "checks": "separate persisted enquiry, quantities, category filters, form errors, review, no personal storage, retail preserved, 4 widths, navigation, GSAP fallback"
+}

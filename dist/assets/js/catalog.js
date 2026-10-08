@@ -17,4 +17,42 @@ const products=[
 const imageFrames=[[251,0,767,1254,1254,1254],[140,0,985,1254,1254,1254],[0,71,1254,1088,1254,1254],[173,0,740,1476,1056,1489],[7,116,1230,1084,1254,1254],[7,218,1247,834,1254,1254],[105,18,1018,1235,1254,1254],[74,43,1104,1175,1254,1254],[33,269,1221,769,1254,1254],[0,40,1230,1198,1254,1254],[100,47,1103,1182,1254,1254],[173,20,945,1205,1254,1254]];
 const brands=[{"id": "al-fakher", "name": "Al Fakher", "image": "assets/images/brands/brand-1.webp"}, {"id": "nakhla", "name": "Nakhla", "image": "assets/images/brands/brand-2.webp"}, {"id": "serbetli", "name": "Serbetli", "image": "assets/images/brands/brand-3.png"}, {"id": "revoshi", "name": "Revoshi", "image": "assets/images/brands/brand-4.webp"}, {"id": "jibiar", "name": "Jibiar", "image": "assets/images/brands/brand-5.webp"}, {"id": "musthave", "name": "MustHave", "image": "assets/images/brands/brand-6.webp"}];
 window.UrbanCatalog={products,brands,imageFrames};
+
+function initBackToTop(){
+  const btn=document.getElementById('back-to-top');
+  if(!btn||btn.dataset.bttReady)return;
+  btn.dataset.bttReady='true';
+  let ticking=false;
+  const update=()=>{
+    const visible=window.scrollY>350;
+    btn.classList.toggle('is-visible',visible);
+    ticking=false;
+  };
+  window.addEventListener('scroll',()=>{
+    if(!ticking){
+      requestAnimationFrame(update);
+      ticking=true;
+    }
+  },{passive:true});
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0,behavior:reduce?'instant':'smooth'});
+    const topTarget=document.getElementById('top')||document.body;
+    if(topTarget){
+      topTarget.setAttribute('tabindex','-1');
+      topTarget.focus({preventScroll:true});
+    }
+  });
+  update();
+}
+window.initBackToTop=initBackToTop;
+if(typeof document!=='undefined'){
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',initBackToTop);
+  }else{
+    initBackToTop();
+  }
+}
 })();
+

@@ -14,7 +14,7 @@ The user values large product images, readable names/prices, generous spacing, s
 | Older original | `/Users/rajan/Downloads/urban-shisha-homepage` — separate; do not edit it for this project |
 | Portfolio project | `/Users/rajan/Downloads/main portfolio` — unrelated; not the store's working folder |
 | Stack | Semantic HTML, custom CSS, vanilla JavaScript, local GSAP + ScrollTrigger |
-| Current pages | `index.html`, `shop.html`, `product.html`, `cart.html`, `checkout.html`, `account.html`, `contact.html` |
+| Current pages | Home, Shop, Product, Cart, Checkout, Account, Contact, Bulk Orders, About and five policy pages (14 HTML pages) |
 | Future platform | Custom WordPress + WooCommerce theme, no Elementor/page builder |
 | Commerce today | Working browser preview, not connected to WooCommerce or payments |
 
@@ -35,6 +35,9 @@ npm start
 - Checkout: http://127.0.0.1:8091/checkout.html
 - Account: http://127.0.0.1:8091/account.html
 - Contact: http://127.0.0.1:8091/contact.html
+- Bulk Orders: http://127.0.0.1:8091/wholesale.html
+- About: http://127.0.0.1:8091/about.html
+- Policies: `shipping.html`, `returns.html`, `privacy.html`, `terms.html`, `age-policy.html`
 
 The server is `scripts/serve.py`, uses port **8091**, and serves compressed HTML/CSS/JS/SVG. It must remain running for local URLs to work. If a URL refuses connection, check the server first; that is not evidence of a design bug. Do not terminate unrelated services to free a port.
 
@@ -87,6 +90,7 @@ The generated stylesheet order is:
 ```text
 fonts.css → style.css → refinements.css → drop.css
           → next-edit.css → shop.css → product.css → cart.css → checkout.css → account.css
+          → contact.css → wholesale.css → pages.css
 ```
 
 Later sheets and responsive rules can override earlier declarations. Inspect the cascade before adding a rule. Scope Shop/Product changes to their components so they do not accidentally alter Home. Avoid a growing pile of contradictory overrides; modify the applicable source declaration when practical. Do not remove old sheets wholesale: current components still depend on them.
@@ -529,3 +533,50 @@ Before handing changes back, check:
 ## 15. Suggested prompt for Antigravity
 
 > Read `design.md` before editing. Continue the existing Urban Shisha project in this folder; preserve its approved design and behaviour. Use current source files and browser views as the baseline, not older screenshots or the superseded emerald/gold concept. Follow the shared tokens, source stylesheet order, responsive rules, transparent photography treatment and GSAP/reduced-motion requirements. Implement only the requested next scope. Keep Home, Shop and Product consistent, rebuild generated CSS/dist, and verify the affected pages and interactions at 1440/1024/768/390px. Report changed files and any real integration work still pending.
+
+## Wholesale page / deferred 3D concept
+
+See [`WHOLESALE-PLAN.md`](WHOLESALE-PLAN.md) for the saved bulk-enquiry page and React Three Fiber miniature warehouse/truck/storefront animation concept. The Wholesale page has now been implemented at the user’s request. The 3D scene remains deferred; do not add React/R3F dependencies or animate workers/trucks until requested.
+
+## Wholesale implementation handoff
+
+`wholesale.html`, `assets/wholesale.css` and `assets/js/wholesale.js` implement the bulk enquiry page. Build/lint/static verification include these files. Header/mobile navigation now says Bulk Orders, and mega menus/footer discovery link to it across existing pages. The retail homepage `#builder` and its internal/content links remain intact.
+
+Hero uses existing transparent product cutouts and a restrained GSAP entrance. `data-future-scene="wholesale-3d"` marks the visual area for future 3D work. No warehouse/truck/customer animation, React runtime, or placeholder 3D promise is included now.
+
+Catalogue categories/search filter the shared products; cards say Wholesale quote on request rather than exposing invented bulk rates. Selected products and quantities (1–9999) are stored separately under `urban-wholesale-enquiry`. These are requested quantities, not a configured MOQ. Retail cart/wishlist storage is not modified by enquiry actions.
+
+Business details form validates name, business, city, six-digit PIN, email, Indian mobile, business type and optional GSTIN format. Contact/business data is kept in the form and prepared message only; it is not persisted or submitted automatically. Submission opens a review dialog with a copyable request. WhatsApp/email links are shown only when configured in `config.js`; the customer chooses whether to open/share. No order is placed, no stock reserved, and no enquiry is falsely claimed sent.
+
+Use `review/wholesale-check.mjs` and its `wholesale-results.json`/screenshots for enquiry, responsive and accessibility verification. Future backend conversion should replace preview preparation with a real quotation workflow while preserving the independent enquiry list and retail cart.
+
+
+## About and policy page handoff
+
+`about.html` is the product-led brand page: a typographic/lilac hero with a violet product poster, editorial introduction, three shop-category panels, product-information principles, adult-use note and Shop CTA. No founder names, founding dates, sales statistics, certifications or merchant history were invented.
+
+`shipping.html`, `returns.html`, `privacy.html`, `terms.html` and `age-policy.html` share a readable policy layout with active page links, section anchors and a review-draft notice. They intentionally do not invent delivery regions/rates, return windows, refund timelines, merchant identity or contact details. See `POLICY-REVIEW.md` before publishing as final business policies.
+
+Shared styling is `assets/pages.css`; shared navigation, photographic SVG hydration, footer accordion, conditional configured WhatsApp link, age-gate logic and a small reduced-motion-aware GSAP entrance are in `assets/js/pages.js`. Product backdrops stay behind transparent photos. Fonts, tokens and icon symbols are the existing ones. Desktop/mobile header labels remain Bulk Orders.
+
+Policy pages remain readable without age confirmation; About retains the age gate. Shopping-page gates remain in their existing page logic. Privacy offers an explicit confirmation dialog to clear only `urban-preview-cart`, `urban-preview-wishlist`, `urban-wholesale-enquiry` and `urban-preview-age`; it leaves unrelated storage intact. Form/business details are not collected on these pages.
+
+About and policy destinations are linked in existing footers. Checkout/account consent links open the standalone policy pages in a new tab to preserve the current form. Existing preview policy-dialog code is retained for other page functions, but those new links use native navigation.
+
+The build now bundles 13 CSS sources and ships 14 HTML pages. Edit source CSS/HTML and rebuild; do not edit generated `assets/site.css` or `dist/` directly.
+
+Verification for the About/policy addition: `review/pages-check.mjs` and `review/pages-results.json` cover six pages at five widths, policy anchors/menu/footer, age gate, privacy clear/cancel and animation fallback. Screenshots are in `review/about-*` and `review/{shipping,returns,privacy,terms,age-policy}-*`.
+
+## Let's talk redirection & Back to top button handoff
+
+- **Let's talk button**:
+  - Replaced `<button class="whatsapp-button" data-info="contact">` with `<a class="whatsapp-button" href="contact.html" aria-label="Contact Urban Shisha">` across all pages.
+  - In `assets/js/app.js`, `shop.js`, and `product.js`, `showInfo('contact')` redirects to `contact.html` (`window.location.href = 'contact.html'`).
+  - Styled with `a.whatsapp-button { text-decoration: none; cursor: pointer; }`.
+- **Back to top floating button**:
+  - HTML markup: `<button class="back-to-top" id="back-to-top" aria-label="Back to top" title="Back to top"><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>`.
+  - Upward arrow SVG icon using `#i-arrow` rotated `-90deg`.
+  - Design tokens: 44px × 44px circular pill, `--bg: #FAF7F2` (Ivory), 2px solid `--ink: #14121F` border, `3px 3px 0 var(--ink)` offset brutalist shadow. On hover: `--accent: #C6FF3D` (Lime), `3px 5px 0 var(--ink)`.
+  - Behavior: controller in `assets/js/catalog.js` tracks `window.scrollY > 350`, toggling `.is-visible` via passive scroll and `requestAnimationFrame`. Click triggers `window.scrollTo({ top: 0, behavior: 'smooth' })` (or instant jump when `prefers-reduced-motion` is active) and restores focus to `#top`.
+  - Stacking and mobile layout: stacks cleanly above `.whatsapp-button` (Desktop: `bottom: 80px; right: 22px;`, Mobile: `bottom: 148px; right: 15px;`, Wholesale: `bottom: 155px`). On pages without the Let's talk button (`contact.html`, `checkout.html`), anchors at `bottom: 22px; right: 22px;` (mobile `bottom: 20px; right: 15px;`). Zero collision or overlap with `.mobile-shop-bar`.
+

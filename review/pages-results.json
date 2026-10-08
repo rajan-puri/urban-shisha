@@ -1,0 +1,67 @@
+{
+  "errors": [],
+  "failed": [],
+  "axe": [
+    {
+      "page": "about",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "shipping",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "returns",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "privacy",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "terms",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "age-policy",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "about",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "shipping",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "returns",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "privacy",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "terms",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "age-policy",
+      "width": 390,
+      "violations": []
+    }
+  ],
+  "checks": "6 pages; 1440/1024/768/390/320px; age gate; table of contents; active policy links; mobile menu/footer; privacy clear/cancel; unrelated data preserved; GSAP fallback"
+}
