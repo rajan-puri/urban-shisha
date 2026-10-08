@@ -1,4 +1,4 @@
-# Urban Shisha — homepage V2 + Shop + Product
+# Urban Shisha — Homepage, Shop, Product, Cart & Checkout
 
 A separate enhanced copy of `/Users/rajan/Downloads/urban-shisha-homepage`. The original homepage remains unchanged.
 
