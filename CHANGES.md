@@ -95,4 +95,33 @@ The Sultan replacement base has not been treated as Brando-compatible or added a
   - `package.json`: added `checkout.js` to `npm run lint`.
   - `review/checkout-check.mjs`, `review/checkout-results.json`: automated test suite with Playwright and AxeBuilder verifying populated & empty carts, billing toggle, invalid & valid submissions, cross-page navigation, and zero accessibility violations across 1440px, 1024px, 768px, and 390px viewports.
 
+## My Account page revision
+
+- `account.html`, `assets/account.css`, `assets/js/account.js`: dedicated My Account page featuring a client preview of user authentication and a fully functional Demo Account Dashboard.
+- **Login / Register View (`#auth-view`)**:
+  - Spacious 2-column layout (Left: branded editorial panel *“YOUR SPACE. YOUR SETUP.”*, *“ONE PLACE FOR YOUR RIG.”*, value proposition feature list, and prominent *“Explore demo account”* callout; Right: accessible tabbed forms for *Log In* and *Create Account*).
+  - Password inputs equipped with accessible show/hide toggle buttons (`aria-label`, `aria-pressed`, dynamic eye/eye-off SVG icons).
+  - Login form: email and password inputs with inline validation, first invalid field auto-focus, and *“Forgot password?”* modal showing an honest WooCommerce launch preview notice.
+  - Register form: full name, email, 8+ character password, required unchecked 18+ confirmation checkbox, required unchecked terms/privacy acceptance, and separate unselected marketing consent.
+  - Honest preview disclaimers: Authentication is not connected; passwords and credentials are never stored, logged, or uploaded; no fake customer records created.
+- **Demo Account Dashboard (`#dashboard-view`)**:
+  - Desktop: Left navigation sidebar with Overview, Orders, Addresses, Wishlist (with live item count badge), Account Details, and an Exit Demo button.
+  - Mobile: Horizontally scrollable segmented nav pills with icons, comfortable touch targets, and zero cramped layout issues.
+  - Overview: *“YOUR ACCOUNT. YOUR KIND OF SETUP.”*, direct navigation cards to Orders, Addresses (showing in-memory count), and Wishlist (displaying actual saved product count from `urban-preview-wishlist`). No fake spending totals, artificial VIP levels, or fabricated orders.
+  - Orders: Default honest empty state (*“No orders yet.”*) with a direct shop CTA.
+  - Addresses: In-memory Add, Edit, and Delete address interactions with `#address-dialog` and `#delete-address-dialog`. Validates required name, street address, city, Indian State/UT dropdown, 6-digit PIN code, and 10-digit mobile number. **Data boundary**: Address records are kept strictly in browser memory for the session and are **never saved to localStorage or sent to a server**.
+  - Wishlist: Integrates with shared `urban-preview-wishlist` and `UrbanCatalog.products`. Renders items with transparent SVG cutouts, title, formatted INR price, View link, *“Add to bag”* (updates `urban-preview-cart` and header counts immediately), and *“Remove”* actions. Empty state displays *“YOUR NEXT FAVOURITE IS WAITING.”* when no items are saved.
+  - Account details: Local validation for personal profile and password modification (checks matching passwords, resets inputs upon valid submission). Never stores passwords.
+  - Exit demo: Returns to Login/Register view while preserving shared cart and wishlist intact.
+  - Deep linking: Supports URL query/hash parameters (`?tab=orders`, `?tab=wishlist`, `?tab=addresses`, `?tab=details`, `?demo=1`) to navigate directly to the requested dashboard section.
+- **Header & Footer Navigation Integration**:
+  - Added user account icon link `<a class="icon-button account-nav" href="account.html">` to header actions.
+  - Updated footer Account & policies links across `index.html`, `shop.html`, `product.html`, `cart.html`, and `account.html` to direct `<a href="account.html">` and `<a href="account.html?tab=orders">`.
+  - Updated `showInfo` in `assets/js/app.js` to navigate directly to `account.html` and `account.html?tab=orders`.
+- **Build & Verification**:
+  - `scripts/build.mjs`: added `account.css` to stylesheet bundle order and `account.html` to static distribution copy.
+  - `package.json`: added `account.js` to `npm run lint`.
+  - `scripts/verify.mjs`: added duplicate ID, relative anchor, and component checks for `account.html`.
+  - `review/account-check.mjs`, `review/account-results.json`: automated Playwright and Axe test suite verifying 1440px, 1024px, 768px, and 390px viewports with zero horizontal overflow, 0 Axe violations, 0 console errors, and 0 network failures.
+
 

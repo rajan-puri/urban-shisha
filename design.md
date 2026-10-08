@@ -14,7 +14,7 @@ The user values large product images, readable names/prices, generous spacing, s
 | Older original | `/Users/rajan/Downloads/urban-shisha-homepage` — separate; do not edit it for this project |
 | Portfolio project | `/Users/rajan/Downloads/main portfolio` — unrelated; not the store's working folder |
 | Stack | Semantic HTML, custom CSS, vanilla JavaScript, local GSAP + ScrollTrigger |
-| Current pages | `index.html`, `shop.html`, `product.html`, `cart.html`, `checkout.html` |
+| Current pages | `index.html`, `shop.html`, `product.html`, `cart.html`, `checkout.html`, `account.html` |
 | Future platform | Custom WordPress + WooCommerce theme, no Elementor/page builder |
 | Commerce today | Working browser preview, not connected to WooCommerce or payments |
 
@@ -33,6 +33,7 @@ npm start
 - Brando product: http://127.0.0.1:8091/product.html
 - Cart: http://127.0.0.1:8091/cart.html
 - Checkout: http://127.0.0.1:8091/checkout.html
+- Account: http://127.0.0.1:8091/account.html
 
 The server is `scripts/serve.py`, uses port **8091**, and serves compressed HTML/CSS/JS/SVG. It must remain running for local URLs to work. If a URL refuses connection, check the server first; that is not evidence of a design bug. Do not terminate unrelated services to free a port.
 
@@ -52,6 +53,7 @@ npm run build
 | `product.html` | Brando gallery, buying panel, specs, related items, zoom dialog |
 | `cart.html` | Dedicated Bag/Cart page, product rows, sticky order summary, empty state |
 | `checkout.html` | Single-page checkout preview, contact & delivery forms, honest notices, order summary |
+| `account.html` | My Account page, Login/Register preview, Demo dashboard, in-memory addresses, wishlist sync |
 | `assets/style.css` | Base/reset, original component structure and responsive foundations |
 | `assets/refinements.css` | Product sizing/readability refinements |
 | `assets/drop.css` | Current brand tokens, visual language, header/nav and shared styling |
@@ -60,6 +62,7 @@ npm run build
 | `assets/product.css` | Full product page and mobile buying bar |
 | `assets/cart.css` | Dedicated Cart page, responsive product rows, summary and empty state |
 | `assets/checkout.css` | Checkout page layout, form inputs, sticky summary card, notices and modal |
+| `assets/account.css` | Account layout, auth hero panel, form cards, dashboard navigation, in-memory address cards, wishlist grid, modals |
 | `assets/fonts.css`, `assets/fonts/` | Local WOFF2 font definitions and files |
 | `assets/js/catalog.js` | Shared products, brand metadata and photographic SVG frames |
 | `assets/js/app.js` | Homepage catalog rendering, filters, builder, dialogs, bag/wishlist |
@@ -68,6 +71,7 @@ npm run build
 | `assets/js/product.js` | Brando gallery/zoom/quantity, buying UI, preview commerce and motion |
 | `assets/js/cart.js` | Cart quantity controls (1-99), line totals, subtotal, wishlist and empty state |
 | `assets/js/checkout.js` | Checkout cart calculation, inline validation, address toggle, preview modal |
+| `assets/js/account.js` | Account password toggle, auth tabs, validation, dashboard navigation, in-memory address CRUD, wishlist sync, exit demo |
 | `assets/js/config.js` | Actual store WhatsApp and Instagram configuration; currently blank |
 | `assets/js/gsap.min.js`, `ScrollTrigger.min.js` | Local animation libraries |
 | `scripts/build.mjs`, `scripts/verify.mjs` | CSS bundle/static build and structural validation |
@@ -79,7 +83,7 @@ The generated stylesheet order is:
 
 ```text
 fonts.css → style.css → refinements.css → drop.css
-          → next-edit.css → shop.css → product.css → cart.css → checkout.css
+          → next-edit.css → shop.css → product.css → cart.css → checkout.css → account.css
 ```
 
 Later sheets and responsive rules can override earlier declarations. Inspect the cascade before adding a rule. Scope Shop/Product changes to their components so they do not accidentally alter Home. Avoid a growing pile of contradictory overrides; modify the applicable source declaration when practical. Do not remove old sheets wholesale: current components still depend on them.
@@ -309,6 +313,52 @@ Dedicated single-page Checkout preview (`checkout.html`) continuing the V2 visua
   - Input font size minimum 16px to prevent iOS Safari auto-zoom.
   - Submit button kept in natural document flow; no fixed elements blocking form fields.
 
+## 8d. Account page
+
+Dedicated My Account page (`account.html`) providing a client preview of user authentication and a fully functional Demo Account Dashboard:
+
+- **Login / Register View (`#auth-view`)**:
+  - Spacious 2-column desktop layout:
+    - **Left column**: Branded editorial panel with *“YOUR SPACE. YOUR SETUP.”*, value propositions (synced wishlist, address management, live dispatch tracking), and a prominent *“Explore demo account”* callout button that opens the dashboard immediately without credentials. Honest disclaimer clarifying that authentication is currently in design preview mode.
+    - **Right column**: Accessible tabbed forms for *Log In* and *Create Account* (`role="tablist"` / `role="tab"` / `role="tabpanel"`).
+  - **Password show/hide toggles**: Accessible buttons (`.password-toggle-btn`) with `aria-pressed`, `aria-label`, and icon toggling between `#i-eye` and `#i-eye-off`.
+  - **Form validation**:
+    - Email format verification and required password.
+    - Registration requires full name, valid email, minimum 8-character password, unchecked required 18+ adult confirmation checkbox, and unchecked required terms/privacy acceptance. Optional newsletter consent is never preselected.
+    - Accessible inline error alerts (`role="alert"`). Automatically focuses the first invalid input on submission.
+    - Passing validation displays an honest preview notice explaining that backend authentication will connect when Urban Shisha launches on WooCommerce. Passwords and credentials are never stored, logged, or uploaded.
+  - **Forgot password**: Trigger opens `#forgot-password-dialog` with an honest preview notice; does not claim an email was dispatched.
+
+- **Demo Account Dashboard (`#dashboard-view`)**:
+  - **Desktop navigation**: Sticky left navigation sidebar with Overview, Orders, Addresses, Wishlist (with live item count pill), Account Details, and an Exit Demo button.
+  - **Mobile navigation**: Horizontally scrollable segmented nav pill bar (`.dashboard-mobile-nav`) with comfortable touch targets and no squeezed sidebar.
+  - **Overview (`#section-overview`)**:
+    - Heading: *“YOUR ACCOUNT. YOUR KIND OF SETUP.”*
+    - Direct navigation metric cards to Orders, Addresses (with live in-memory address count), and Wishlist (displaying actual saved product count from `urban-preview-wishlist`).
+    - Excludes fake spending totals, fabricated orders, or artificial VIP levels.
+  - **Orders (`#section-orders`)**:
+    - Default honest empty state: *“No orders yet.”* with descriptive guidance and an *“Explore the shop”* button linking to `shop.html`.
+    - Does not fabricate order numbers or convert preview cart items into fake orders.
+  - **Addresses (`#section-addresses`)**:
+    - Default empty state with an *“Add your first address”* CTA.
+    - Full in-memory Add, Edit, and Delete interactions via `#address-dialog` and `#delete-address-dialog`.
+    - Collects Purpose (Delivery / Billing), Full Name, Street Address, Optional Landmark, City, Indian State/UT dropdown, 6-digit PIN code, Country (India, readonly), and 10-digit mobile number.
+    - Validates required fields, highlights errors, and preserves user input on errors.
+    - **Data boundary**: Address records are kept strictly in browser memory for the session and are **never saved to localStorage or sent to a server**.
+  - **Wishlist (`#section-wishlist`)**:
+    - Integrates directly with shared `urban-preview-wishlist` and `UrbanCatalog.products`.
+    - Renders saved items with transparent SVG cutout photography (`viewBox` framed), brand, product title, formatted INR price, View link, *“Add to bag”* button, and *“Remove”* button.
+    - Adding to bag updates `urban-preview-cart` and visible header counts (`.cart-count`) immediately with visual confirmation.
+    - Removing items updates storage and counter badges. When 0 items remain, smoothly transitions to the empty state (*“YOUR NEXT FAVOURITE IS WAITING.”* + Shop CTA).
+  - **Account details (`#section-details`)**:
+    - Two clean cards: Personal profile form (name, email) and Password update form (current, new 8+ chars, confirm).
+    - Local validation only; fields cleared on valid submission. Never persists or logs passwords.
+  - **Exit demo**:
+    - Action button in sidebar and mobile nav returns the user to the Login/Register view.
+    - **Crucial**: Leaves `urban-preview-cart` and `urban-preview-wishlist` completely intact.
+
+- **URL routing**: Supports deep linking via `?tab=orders`, `?tab=wishlist`, `?tab=addresses`, `?tab=details`, or `?demo=1` to open the demo dashboard directly with the requested tab active.
+
 ## 9. Photography: preserve transparency and product identity
 
 The user previously rejected white rectangles over transparent products and decorative colour blobs tinting the actual objects. Avoid both regressions.
@@ -412,6 +462,7 @@ Existing browser scripts:
 | `review/product-check.mjs` | Gallery/zoom, quantities, wishlist, mobile buy, shared cart, Shop link, accessibility |
 | `review/cart-check.mjs` | Cart rows, line totals, subtotal, quantity modification, wishlist toggle, empty state, accessibility |
 | `review/checkout-check.mjs` | Single-page checkout, inline validation, phone/PIN formats, billing toggle, preview modal, multi-viewport layout, accessibility |
+| `review/account-check.mjs` | Auth view, password show/hide, login/register validation, demo dashboard, in-memory address CRUD, wishlist sync, account details, exit demo, deep links, 4 viewports, 0 Axe violations |
 | `review/quality-v2.mjs` | Homepage automated accessibility at four widths |
 | `review/fallback-v2.mjs` | Homepage controls/content with animation libraries blocked |
 
