@@ -90,7 +90,7 @@ The generated stylesheet order is:
 ```text
 fonts.css → style.css → refinements.css → drop.css
           → next-edit.css → shop.css → product.css → cart.css → checkout.css → account.css
-          → contact.css → wholesale.css → pages.css
+          → contact.css → wholesale.css → pages.css → navigation.css
 ```
 
 Later sheets and responsive rules can override earlier declarations. Inspect the cascade before adding a rule. Scope Shop/Product changes to their components so they do not accidentally alter Home. Avoid a growing pile of contradictory overrides; modify the applicable source declaration when practical. Do not remove old sheets wholesale: current components still depend on them.
@@ -563,7 +563,7 @@ Policy pages remain readable without age confirmation; About retains the age gat
 
 About and policy destinations are linked in existing footers. Checkout/account consent links open the standalone policy pages in a new tab to preserve the current form. Existing preview policy-dialog code is retained for other page functions, but those new links use native navigation.
 
-The build now bundles 13 CSS sources and ships 14 HTML pages. Edit source CSS/HTML and rebuild; do not edit generated `assets/site.css` or `dist/` directly.
+The build now bundles 14 CSS sources and ships 14 HTML pages. Edit source CSS/HTML and rebuild; do not edit generated `assets/site.css` or `dist/` directly.
 
 Verification for the About/policy addition: `review/pages-check.mjs` and `review/pages-results.json` cover six pages at five widths, policy anchors/menu/footer, age gate, privacy clear/cancel and animation fallback. Screenshots are in `review/about-*` and `review/{shipping,returns,privacy,terms,age-policy}-*`.
 
@@ -580,3 +580,12 @@ Verification for the About/policy addition: `review/pages-check.mjs` and `review
   - Behavior: controller in `assets/js/catalog.js` tracks `window.scrollY > 350`, toggling `.is-visible` via passive scroll and `requestAnimationFrame`. Click triggers `window.scrollTo({ top: 0, behavior: 'smooth' })` (or instant jump when `prefers-reduced-motion` is active) and restores focus to `#top`.
   - Stacking and mobile layout: stacks cleanly above `.whatsapp-button` (Desktop: `bottom: 80px; right: 22px;`, Mobile: `bottom: 148px; right: 15px;`, Wholesale: `bottom: 155px`). On pages without the Let's talk button (`contact.html`, `checkout.html`), anchors at `bottom: 22px; right: 22px;` (mobile `bottom: 20px; right: 15px;`). Zero collision or overlap with `.mobile-shop-bar`.
 
+
+
+## Shared account header menu
+
+Every page, including the compact Checkout header, has one `account-entry` with an `i-user` icon, `#account-trigger` disclosure button and `#account-shortcuts` panel. `assets/navigation.css` and `assets/js/navigation.js` own this shared component. All HTML pages load the script; it is included in lint/build/static verification. Do not add account-dropdown behaviour separately to individual page scripts.
+
+Mouse hover opens the panel; click can keep it open. Touch uses tap to open/close. ArrowDown/ArrowUp on the trigger moves focus into the panel, Escape closes and restores trigger focus, and Tab/outside click closes naturally. Links use native navigation to Account, Orders, Addresses, Wishlist and Contact. The menu does not infer authentication, create a session or mutate account/cart data. The existing Account page still provides its clearly identified preview/demo flows.
+
+Account and Shop/mobile menus coordinate opening. The account panel is repositioned inside the viewport with an available-height scroll limit; it is not a fullscreen overlay and does not lock page scrolling. Mobile keeps the account icon visible while the existing separate wishlist icon remains hidden. The Checkout header retains its compact layout with an added account icon; the decorative 18+ pill is hidden at small widths to preserve room for the logo and Back to bag link.

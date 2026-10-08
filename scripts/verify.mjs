@@ -69,3 +69,11 @@ for(const [pName, pHtml, pIds] of [
  }
 }
 
+
+for(const filename of ['index.html','shop.html','product.html','cart.html','checkout.html','account.html','contact.html','wholesale.html','about.html','shipping.html','returns.html','privacy.html','terms.html','age-policy.html']){
+ const content=await fs.readFile(path.join(root,filename),'utf8');
+ assert.equal((content.match(/id="account-trigger"/g)||[]).length,1,`One account trigger expected: ${filename}`);
+ assert.equal((content.match(/id="account-shortcuts"/g)||[]).length,1,`One account dropdown expected: ${filename}`);
+ assert(content.includes('assets/js/navigation.js'),`Missing shared navigation script: ${filename}`);
+ assert(content.includes('id="i-user"'),`Missing account icon symbol: ${filename}`);
+}

@@ -6,7 +6,7 @@ A separate enhanced copy of `/Users/rajan/Downloads/urban-shisha-homepage`. The 
 
 Run `npm start`, then open http://127.0.0.1:8091/. Run `npm run lint` and `npm run build` to verify and generate `dist/`.
 
-The preview server compresses HTML, CSS, JavaScript and SVG. The build combines the thirteen CSS source files into `assets/site.css`. Edit the source stylesheets, then rebuild to refresh the bundle.
+The preview server compresses HTML, CSS, JavaScript and SVG. The build combines the fourteen CSS source files into `assets/site.css`. Edit the source stylesheets, then rebuild to refresh the bundle.
 
 ## What's included
 
@@ -61,3 +61,5 @@ Open http://127.0.0.1:8091/wholesale.html. Select products, adjust quantities, a
 ## About and policies
 
 Open `about.html` for the new brand page. Standalone policies are `shipping.html`, `returns.html`, `privacy.html`, `terms.html` and `age-policy.html`. Existing footer links point to these pages; About is under Discover. They use `assets/pages.css` / `assets/js/pages.js` and are included in lint/build/static verification. Policy business terms remain clearly marked review drafts; fill the real merchant and operational details in `POLICY-REVIEW.md` before live use.
+
+Account access is shared across all 14 pages, including Checkout. `assets/navigation.css` / `assets/js/navigation.js` provide the hover/click/tap dropdown, keyboard access and responsive positioning.

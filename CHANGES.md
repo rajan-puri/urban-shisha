@@ -200,3 +200,12 @@ Verification: lint/static checks and build pass. Six-page browser checks passed 
   - Updated `scripts/verify.mjs` with assertions ensuring `#back-to-top` exists across all pages and `.whatsapp-button` links to `contact.html`.
   - Added Playwright test suite `scripts/test-back-to-top.mjs` verifying navigation, scroll reveal, smooth scroll restoration, and zero mobile bounding box overlap (`review/mobile-buttons-scroll.png`, `review/desktop-home-scrolled-1440.png`, `review/desktop-contact-scrolled-1440.png`).
 
+
+
+## Account icon and hover menu — 8 October 2026
+
+Added a consistent account icon and shared account dropdown to all 14 pages, including Checkout. Mouse hover opens it; click/tap, keyboard arrows, Tab and Escape also work. The panel links to Sign in/Register, Orders, Addresses, Wishlist and Contact, using the existing account-preview routes without inventing a logged-in user. It coordinates with Shop/mobile menus and stays inside small viewport boundaries.
+
+Implementation: `assets/navigation.css`, `assets/js/navigation.js`, header markup/icon symbols across the HTML pages, and build/lint/static checks. The compact mobile Checkout header hides its decorative age pill to make room for account access. The build now includes 14 CSS source files; HTML page count remains 14.
+
+Account menu verification: lint/build/static checks pass. All 14 pages pass desktop hover/click/Escape checks and mobile touch/viewport checks at 390 and 320px, plus 1024px layout/hover-exit checks. Keyboard focus, Shop menu coordination and Wishlist routing pass; no JavaScript errors, failed asset responses or automated accessibility violations in the checked account menus. Reports/screenshots: `review/account-menu-*`.

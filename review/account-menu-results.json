@@ -1,0 +1,37 @@
+{
+  "errors": [],
+  "failed": [],
+  "axe": [
+    {
+      "page": "index",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "checkout",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "page": "index",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "checkout",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "page": "index",
+      "width": 320,
+      "violations": []
+    },
+    {
+      "page": "checkout",
+      "width": 320,
+      "violations": []
+    }
+  ],
+  "checks": "All 14 pages: desktop hover/click/Escape; touch at 390 and 320px; icon SVGs; menu bounds/no overflow; keyboard entry/focus; Shop menu coordination; Wishlist routing"
+}
