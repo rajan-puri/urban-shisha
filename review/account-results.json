@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "viewportsTested": [
+    1440,
+    1024,
+    768,
+    390
+  ],
+  "axeViolations": 0,
+  "consoleErrors": 0,
+  "networkFailures": 0,
+  "timestamp": "2026-10-08T15:02:09.610Z"
+}
