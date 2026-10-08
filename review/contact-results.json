@@ -1,0 +1,35 @@
+{
+  "viewports": {
+    "390": {
+      "overflow": false,
+      "width": 390
+    },
+    "768": {
+      "overflow": false,
+      "width": 768
+    },
+    "1024": {
+      "overflow": false,
+      "width": 1024
+    },
+    "1440": {
+      "overflow": false,
+      "width": 1440
+    }
+  },
+  "axe": {
+    "390": {
+      "violations": 0
+    },
+    "768": {
+      "violations": 0
+    },
+    "1024": {
+      "violations": 0
+    },
+    "1440": {
+      "violations": 0
+    }
+  },
+  "passed": true
+}
